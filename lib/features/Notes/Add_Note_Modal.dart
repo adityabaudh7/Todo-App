@@ -58,7 +58,7 @@ class AddNoteModal extends ConsumerWidget {
                     inputType: TextInputType.multiline,
                     label: 'Notes',
                     radius: 8.0,
-                    maxLines: 4,
+                    maxLines: 6,
                   ),
                   SizedBox(height: Dimensions.paddingSizeDefault),
                 ],
