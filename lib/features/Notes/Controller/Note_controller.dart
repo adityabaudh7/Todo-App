@@ -5,16 +5,16 @@ import 'package:taskplus/features/Notes/Model/S_Notes_Model.dart';
 final FirebaseAuth auth = FirebaseAuth.instance;
 
 class NoteController {
-  final todoCollection = FirebaseFirestore.instance
+  final noteCollection = FirebaseFirestore.instance
       .collection('users')
       .doc(auth.currentUser!.uid)
       .collection('ShortNote');
-  // create todo
-  void addNewTask(NoteModel model) {
-    todoCollection.add(model.toMap());
+  // create notes
+  void addNewNote(NoteModel model) {
+    noteCollection.add(model.toMap());
   }
 
   void deleteTask(String? docID) {
-    todoCollection.doc(docID).delete();
+    noteCollection.doc(docID).delete();
   }
 }

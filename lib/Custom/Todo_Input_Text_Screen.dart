@@ -17,6 +17,7 @@ class TextInputField extends StatefulWidget {
   final bool isPhone;
   final bool isEmail;
   final double radius;
+  final FocusNode? focusNode;
 
   final TextInputType inputType;
   final TextEditingController controller;
@@ -35,7 +36,7 @@ class TextInputField extends StatefulWidget {
     this.isPhone = false,
     this.isEmail = false,
     this.radius = 45.00,
-    this.maxLines = 1,
+    this.maxLines = 1,  this.focusNode,
   });
 
   @override
@@ -99,6 +100,7 @@ class _TextInputFieldState extends State<TextInputField> {
           TextFormField(
             cursorColor: ColorPalate.DARK_PRIMERY,
             keyboardType: widget.inputType,
+            focusNode: widget.focusNode,
             obscureText: widget.isPassword ? _obscureText : widget.obscureText,
             maxLength: widget.isPhone ? widget.maxLength : null,
             validator: (value) {

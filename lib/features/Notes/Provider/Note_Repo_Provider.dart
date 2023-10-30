@@ -3,13 +3,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:taskplus/features/Notes/Controller/Note_controller.dart';
 import 'package:taskplus/features/Notes/Model/S_Notes_Model.dart';
-import 'package:taskplus/features/Task/Controller/Todo_Controller.dart';
 
 final FirebaseAuth auth = FirebaseAuth.instance;
 
-final servicesProvider = StateProvider<TodoController>((ref) {
-  return TodoController();
+final notesProvider = StateProvider<NoteController>((ref) {
+  return NoteController();
 });
 
 final fetchNoteData = StreamProvider<List<NoteModel>>((ref) async* {

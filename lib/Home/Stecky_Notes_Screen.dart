@@ -35,8 +35,9 @@ class _StickyNotesScreenState extends ConsumerState<StickyNotesScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          myBottamModal(context);
-       
+          setState(() {
+            myBottamModal(context);
+          });
         },
         child: Icon(
           FontAwesomeIcons.plus,
