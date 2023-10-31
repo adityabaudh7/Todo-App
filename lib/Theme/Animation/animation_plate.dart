@@ -5,4 +5,5 @@ class Motion {
   static const String LOGIN = 'assets/Animation/Todo_login.json';
   static const String Password = 'assets/Animation/password_login.json';
   static const String BORDING3 = 'assets/Animation/Todo_three.json';
+  static const String NODATA = 'assets/Animation/NODATA.json';
 }
