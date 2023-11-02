@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:taskplus/Settings/services/Greet_Services.dart';
 import 'package:taskplus/Theme/Color_plate.dart';
-import 'package:taskplus/Theme/text_theme.dart';
+import 'package:taskplus/Theme/Utils/text_theme.dart';
 
 class DropdownWidget extends ConsumerStatefulWidget {
   final String titleText;

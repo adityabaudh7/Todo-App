@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:taskplus/Theme/Color_plate.dart';
-import 'package:taskplus/Theme/Dimensions.dart';
-import 'package:taskplus/Theme/text_theme.dart';
+import 'package:taskplus/Theme/Utils/Dimensions.dart';
+import 'package:taskplus/Theme/Utils/text_theme.dart';
 
 class TextInputField extends StatefulWidget {
   final String label;
@@ -18,7 +18,7 @@ class TextInputField extends StatefulWidget {
   final bool isEmail;
   final double radius;
   final FocusNode? focusNode;
-
+  final bool isEnable;
   final TextInputType inputType;
   final TextEditingController controller;
   const TextInputField({
@@ -36,7 +36,9 @@ class TextInputField extends StatefulWidget {
     this.isPhone = false,
     this.isEmail = false,
     this.radius = 45.00,
-    this.maxLines = 1,  this.focusNode,
+    this.isEnable = true,
+    this.maxLines = 1,
+    this.focusNode,
   });
 
   @override
@@ -126,6 +128,7 @@ class _TextInputFieldState extends State<TextInputField> {
             // (value) {
             //   return widget.isPassword ? _validatePassword(value) : null;
             // },
+            enabled: widget.isEnable,
             decoration: InputDecoration(
               contentPadding:
                   const EdgeInsets.symmetric(vertical: 6.0, horizontal: 10),

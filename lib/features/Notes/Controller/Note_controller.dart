@@ -14,6 +14,12 @@ class NoteController {
     noteCollection.add(model.toMap());
   }
 
+  void updateTask(String? docID, String? noteTitle, String? noteDiscreptions) {
+    noteCollection
+        .doc(docID)
+        .update({'titleTask': noteTitle, 'disCription': noteDiscreptions});
+  }
+
   void deleteTask(String? docID) {
     noteCollection.doc(docID).delete();
   }

@@ -106,7 +106,7 @@ class AuthRepo {
   }) async {
     try {
       String photoUrl =
-          'https://firebasestorage.googleapis.com/v0/b/my-to-do-list-846ed.appspot.com/o/rajjjjjj.jpg?alt=media&token=87600d04-e81c-4c72-92f0-6134649c86f3';
+          'https://firebasestorage.googleapis.com/v0/b/todo-plus-c097a.appspot.com/o/userplus-removebg-preview.png?alt=media&token=7ece9e5d-07bc-461c-bd18-1b512ca65bfe&_gl=1*1y05r4i*_ga*MjA0MjgwMDg2Ny4xNjg5NzMzNzcy*_ga_CW55HF8NVT*MTY5ODg5OTcyMS4xMDMuMS4xNjk4OTAxMjE5LjM1LjAuMA..';
 
       UserCredential userCredential = await auth.createUserWithEmailAndPassword(
           email: email, password: password);
@@ -144,7 +144,7 @@ class AuthRepo {
   }) async {
     try {
       String photoUrl =
-          'https://firebasestorage.googleapis.com/v0/b/my-to-do-list-846ed.appspot.com/o/rajjjjjj.jpg?alt=media&token=87600d04-e81c-4c72-92f0-6134649c86f3';
+          'https://firebasestorage.googleapis.com/v0/b/todo-plus-c097a.appspot.com/o/userplus-removebg-preview.png?alt=media&token=7ece9e5d-07bc-461c-bd18-1b512ca65bfe&_gl=1*1y05r4i*_ga*MjA0MjgwMDg2Ny4xNjg5NzMzNzcy*_ga_CW55HF8NVT*MTY5ODg5OTcyMS4xMDMuMS4xNjk4OTAxMjE5LjM1LjAuMA..';
 
       String uid = auth.currentUser!.uid;
 
@@ -170,4 +170,29 @@ class AuthRepo {
       print(e);
     }
   }
+
+
+void updateProfilePic({
+  required File profilePic,
+  required ProviderRef ref,
+  required BuildContext context,
+}) async {
+  try {
+    String uid = auth.currentUser!.uid;
+
+    String photoUrl = await ref
+        .read(commonFirebaseStoreRepoProvider)
+        .storeFieldToFirebase('profilePic/$uid', profilePic);
+
+    await firestore.collection('users').doc(uid).update({
+      'profilePic': photoUrl,
+    });
+
+    print('Profile picture updated successfully.');
+  } catch (e) {
+    print(e);
+  }
+}
+
+
 }

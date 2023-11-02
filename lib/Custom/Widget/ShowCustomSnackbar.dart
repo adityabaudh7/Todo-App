@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:taskplus/Theme/Color_plate.dart';
-import 'package:taskplus/Theme/text_theme.dart';
+import 'package:taskplus/Theme/Utils/text_theme.dart';
 
 void showSnackBar(
     {required String message, bool? isError, bool isToaster = false}) {

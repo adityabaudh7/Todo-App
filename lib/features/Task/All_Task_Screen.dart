@@ -5,10 +5,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:taskplus/Custom/Widget/ShowCustomSnackbar.dart';
+import 'package:taskplus/Theme/Animation/animation_plate.dart';
 import 'package:taskplus/Theme/Color_plate.dart';
-import 'package:taskplus/Theme/Dimensions.dart';
-import 'package:taskplus/Theme/text_theme.dart';
+import 'package:taskplus/Theme/Utils/Dimensions.dart';
+import 'package:taskplus/Theme/Utils/text_theme.dart';
 import 'package:taskplus/features/Task/Controller/Todo_Controller.dart';
 import 'package:taskplus/features/Task/Repositry/Todo_Repositry.dart';
 import 'package:taskplus/features/Task/Widget/Shimer_card.dart';
@@ -40,81 +42,88 @@ class AllTaskScreen extends ConsumerWidget {
         ),
         body: todoDataList.value == null
             ? SimmerScreen()
-            : ListView.builder(
-                shrinkWrap: true,
-                physics: BouncingScrollPhysics(),
-                itemCount: todoDataList.value!.length,
-                itemBuilder: (context, index) {
-                  final TodoTask = todoDataList.value![index];
-                  return Slidable(
-                    key: ValueKey(0),
-                    endActionPane:
-                        ActionPane(motion: ScrollMotion(), children: [
-                      SlidableAction(
-                        flex: 2,
-                        onPressed: (context) {
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                title: Text("Confirm Delete"),
-                                content: Text(
-                                    "Are you sure you want to delete this item?"),
-                                actions: <Widget>[
-                                  TextButton(
-                                    child: Text("Cancel"),
-                                    onPressed: () {
-                                      Navigator.of(context)
-                                          .pop(); // Close the dialog
-                                    },
-                                  ),
-                                  TextButton(
-                                    child: Text("Delete"),
-                                    onPressed: () {
-                                      final todoData = ref.watch(fetchData);
-                                      final docID =
-                                          todoData.value![index].docID;
-                                      TodoController().deleteTask(docID);
-                                      Navigator.of(context)
-                                          .pop(); // Close the dialog
-                                      showSnackBar(
-                                          message: 'Task Deleted',
-                                          isError: false,
-                                          isToaster: true);
-                                    },
-                                  ),
-                                ],
+            : todoDataList.value!.length != 0
+                ? ListView.builder(
+                    shrinkWrap: true,
+                    physics: BouncingScrollPhysics(),
+                    itemCount: todoDataList.value!.length,
+                    itemBuilder: (context, index) {
+                      final TodoTask = todoDataList.value![index];
+                      return Slidable(
+                        key: ValueKey(0),
+                        endActionPane:
+                            ActionPane(motion: ScrollMotion(), children: [
+                          SlidableAction(
+                            flex: 2,
+                            onPressed: (context) {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: Text("Confirm Delete"),
+                                    content: Text(
+                                        "Are you sure you want to delete this item?"),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        child: Text("Cancel"),
+                                        onPressed: () {
+                                          Navigator.of(context)
+                                              .pop(); // Close the dialog
+                                        },
+                                      ),
+                                      TextButton(
+                                        child: Text("Delete"),
+                                        onPressed: () {
+                                          final todoData = ref.watch(fetchData);
+                                          final docID =
+                                              todoData.value![index].docID;
+                                          TodoController().deleteTask(docID);
+                                          Navigator.of(context)
+                                              .pop(); // Close the dialog
+                                          showSnackBar(
+                                              message: 'Task Deleted',
+                                              isError: false,
+                                              isToaster: true);
+                                        },
+                                      ),
+                                    ],
+                                  );
+                                },
                               );
                             },
-                          );
-                        },
-                        backgroundColor: darkMode
-                            ? ColorPalate.black2
-                            : ColorPalate.TRANSPARENT,
-                        foregroundColor: ColorPalate.RED,
-                        icon: FontAwesomeIcons.solidTrashCan,
-                        label: 'Delete',
-                      ),
-                    ]),
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                          vertical: Dimensions.paddingSizeExtraSmall,
-                          horizontal: Dimensions.paddingSizeSmall),
-                      child: CardTodoWidget(
-                        getIndex: index,
-                        titleTask: TodoTask.titleTask,
-                        disCription: TodoTask.disCription,
-                        isDone: TodoTask.isDone,
-                        docID: TodoTask.docID ?? '',
-                        dateTask: TodoTask.dateTask,
-                        startTimeTask: TodoTask.startTimeTask,
-                        endTimeTask: TodoTask.endTimeTask,
-                        repeatTask: TodoTask.repeatTask,
-                        cateogry: TodoTask.cateogry,
-                      ),
-                    ),
-                  );
-                },
-              ));
+                            backgroundColor: darkMode
+                                ? ColorPalate.black2
+                                : ColorPalate.TRANSPARENT,
+                            foregroundColor: ColorPalate.RED,
+                            icon: FontAwesomeIcons.solidTrashCan,
+                            label: 'Delete',
+                          ),
+                        ]),
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              vertical: Dimensions.paddingSizeExtraSmall,
+                              horizontal: Dimensions.paddingSizeSmall),
+                          child: CardTodoWidget(
+                            getIndex: index,
+                            titleTask: TodoTask.titleTask,
+                            disCription: TodoTask.disCription,
+                            isDone: TodoTask.isDone,
+                            docID: TodoTask.docID ?? '',
+                            dateTask: TodoTask.dateTask,
+                            startTimeTask: TodoTask.startTimeTask,
+                            endTimeTask: TodoTask.endTimeTask,
+                            repeatTask: TodoTask.repeatTask,
+                            cateogry: TodoTask.cateogry,
+                          ),
+                        ),
+                      );
+                    },
+                  )
+                : Center(
+                    child: Container(
+                        height: 150.00,
+                        width: double.infinity,
+                        child: Lottie.asset(Motion.NODATA)),
+                  ));
   }
 }

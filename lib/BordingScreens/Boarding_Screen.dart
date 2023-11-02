@@ -8,8 +8,7 @@ import 'package:taskplus/Dashboard/Todo_Dashboard.dart';
 import 'package:taskplus/Home/Todo_HomeScreen.dart';
 import 'package:taskplus/Screens/Todo_Welcome_Screen.dart';
 import 'package:taskplus/Theme/Color_plate.dart';
-import 'package:taskplus/Theme/Dimensions.dart';
-import 'package:taskplus/Theme/text_theme.dart';
+import 'package:taskplus/Theme/Utils/text_theme.dart';
 import 'package:taskplus/features/Task/Repositry/Todo_Repositry.dart';
 import 'package:taskplus/main.dart';
 

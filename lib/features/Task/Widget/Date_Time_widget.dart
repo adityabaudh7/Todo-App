@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:taskplus/Theme/Color_plate.dart';
-import 'package:taskplus/Theme/text_theme.dart';
+import 'package:taskplus/Theme/Utils/text_theme.dart';
 
 class DateTimeWidget extends StatelessWidget {
   final String titleText;

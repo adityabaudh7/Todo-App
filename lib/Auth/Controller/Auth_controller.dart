@@ -38,7 +38,6 @@ class AuthController {
 // for logout
   void LogoutUser() {
     authRepository.SignoutUser();
-  
   }
 
 // for delete account
@@ -68,5 +67,16 @@ class AuthController {
         password: password,
         ref: ref,
         context: context);
+  }
+
+  void UpdateUserProfile({
+    required BuildContext context,
+    required File profilePic,
+  }) {
+    authRepository.updateProfilePic(
+      profilePic: profilePic,
+      ref: ref,
+      context: context,
+    );
   }
 }

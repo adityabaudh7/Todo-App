@@ -5,7 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:taskplus/Custom/Widget/ShowCustomSnackbar.dart';
 import 'package:taskplus/Theme/Color_plate.dart';
-import 'package:taskplus/Theme/text_theme.dart';
+import 'package:taskplus/Theme/Images/Image_plate.dart';
+import 'package:taskplus/Theme/Utils/text_theme.dart';
 import 'package:taskplus/features/Task/Repositry/Todo_Repositry.dart';
 
 class CardTodoWidget extends ConsumerWidget {
@@ -93,152 +94,160 @@ class CardTodoWidget extends ConsumerWidget {
                   displayText = 'Genral';
                   break;
               }
-              return Container(
-                height: 120,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    color: darkMode ? ColorPalate.BLACK : ColorPalate.WHITE,
-                    borderRadius: BorderRadius.circular(12)),
-                child: Row(
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                          color: CategryColor,
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(12),
-                              bottomLeft: Radius.circular(12))),
-                      width: 20,
-                      // child: Text('data'),
-                      //aditya
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children:
-                            displayText.toUpperCase().split('').map((letter) {
-                          return Text(
-                            letter,
-                            style: TextStyle(
-                                color: ColorPalate.WHITE,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w600),
-                          );
-                        }).toList(),
-                      ),
-                    ),
-                    Expanded(
-                        child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 12),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          ListTile(
-                            contentPadding: EdgeInsets.zero,
-                            title: Text(
-                              titleTask,
-                              // todoData[getIndex].titleTask,
-                              style: titleRegular,
-                            ),
-                            subtitle: Container(
-                              width: 150,
-                              child: Text(
-                                disCription,
-                                // todoData[getIndex].disCription,
-                                maxLines: 2,
-                                textAlign: TextAlign.justify,
-                                overflow: TextOverflow.ellipsis,
-                                style: titilliumRegular.copyWith(
-                                    color: ColorPalate.GREY),
-                              ),
-                            ),
-                            trailing: Transform.scale(
-                              scale: 1.5,
-                              child: Checkbox(
-                                  shape: CircleBorder(),
-                                  activeColor: CategryColor,
-                                  value: isDone,
-                                  // todoData[getIndex].isDone,
-                                  onChanged: (value) {
-                                    ref.read(servicesProvider).updateTask(
-                                        // todoData[getIndex].docID
-                                        docID,
-                                        value);
-                                    if (value == true) {
-                                      showSnackBar(
-                                          message: 'Task Completed',
-                                          isToaster: true);
-                                    } else {
-                                      showSnackBar(
-                                          message: 'Task Pending',
-                                          isToaster: true);
-                                    }
-                                  }),
-                            ),
+              return Stack(
+                children: [
+                  Container(
+                    height: 120,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                        color: darkMode ? ColorPalate.BLACK : ColorPalate.WHITE,
+                        borderRadius: BorderRadius.circular(12)),
+                    child: Row(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                              color: CategryColor,
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(12),
+                                  bottomLeft: Radius.circular(12))),
+                          width: 20,
+                          // child: Text('data'),
+                          //aditya
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: displayText
+                                .toUpperCase()
+                                .split('')
+                                .map((letter) {
+                              return Text(
+                                letter,
+                                style: TextStyle(
+                                    color: ColorPalate.WHITE,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w600),
+                              );
+                            }).toList(),
                           ),
-                          Divider(
-                            thickness: 1.5,
-                            color: ColorPalate.GREY.withOpacity(0.2),
-                          ),
-                          Row(
+                        ),
+                        Expanded(
+                            child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 12),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              // Text(todoData[getIndex].dateTask),
-                              Text(
-                                formatDate(dateTask
-                                    // todoData[getIndex].dateTask
-                                    ),
-                                style: titilliumRegular.copyWith(
-                                    fontWeight: FontWeight.w500),
+                              ListTile(
+                                contentPadding: EdgeInsets.zero,
+                                title: Text(
+                                  titleTask,
+                                  // todoData[getIndex].titleTask,
+                                  style: titleRegular,
+                                ),
+                                subtitle: Container(
+                                  width: 150,
+                                  child: Text(
+                                    disCription,
+                                    // todoData[getIndex].disCription,
+                                    maxLines: 2,
+                                    textAlign: TextAlign.justify,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: titilliumRegular.copyWith(
+                                        color: ColorPalate.GREY),
+                                  ),
+                                ),
+                                trailing: Transform.scale(
+                                  scale: 1.5,
+                                  child: Checkbox(
+                                      shape: CircleBorder(),
+                                      activeColor: CategryColor,
+                                      value: isDone,
+                                      // todoData[getIndex].isDone,
+                                      onChanged: (value) {
+                                        ref.read(servicesProvider).updateTask(
+                                            // todoData[getIndex].docID
+                                            docID,
+                                            value);
+                                        if (value == true) {
+                                          showSnackBar(
+                                              message: 'Task Completed',
+                                              isToaster: true);
+                                        } else {
+                                          showSnackBar(
+                                              message: 'Task Pending',
+                                              isToaster: true);
+                                        }
+                                      }),
+                                ),
                               ),
-                              SizedBox(width: 5),
-                              Icon(
-                                Icons.circle,
-                                size: 8,
+                              Divider(
+                                thickness: 1.5,
+                                color: ColorPalate.GREY.withOpacity(0.2),
                               ),
-                              SizedBox(width: 5),
-                              Text(startTimeTask,
-                                  // todoData[getIndex].startTimeTask,
-                                  style: titilliumRegular.copyWith(
-                                      fontWeight: FontWeight.w500)),
-                              endTimeTask == 'HH : MM'
-                                  ? Text('')
-                                  : Text(
-                                      // '-${todoData[getIndex].endTimeTask}',
-                                      '-${endTimeTask}',
+                              Row(
+                                children: [
+                                  // Text(todoData[getIndex].dateTask),
+                                  Text(
+                                    formatDate(dateTask
+                                        // todoData[getIndex].dateTask
+                                        ),
+                                    style: titilliumRegular.copyWith(
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                  SizedBox(width: 5),
+                                  Icon(
+                                    Icons.circle,
+                                    size: 8,
+                                  ),
+                                  SizedBox(width: 5),
+                                  Text(startTimeTask,
+                                      // todoData[getIndex].startTimeTask,
                                       style: titilliumRegular.copyWith(
-                                          fontWeight: FontWeight.w500),
-                                    ),
+                                          fontWeight: FontWeight.w500)),
+                                  endTimeTask == 'HH : MM'
+                                      ? Text('')
+                                      : Text(
+                                          // '-${todoData[getIndex].endTimeTask}',
+                                          '-${endTimeTask}',
+                                          style: titilliumRegular.copyWith(
+                                              fontWeight: FontWeight.w500),
+                                        ),
 
-                              SizedBox(width: 5),
-                              // todoData[getIndex].repeatTask
-                              repeatTask == 'select'
-                                  ? Text('')
-                                  : InkWell(
-                                      onTap: () {
-                                        showSnackBar(
-                                            message: 'Repation Active',
-                                            isError: false,
-                                            isToaster: true);
-                                      },
-                                      child: Icon(
-                                        Icons.notifications_active,
-                                        size: 15,
-                                      ),
-                                    ),
-                              SizedBox(width: 10),
-                              // todoData[getIndex].isDone
-                              isDone
-                                  ? CircleAvatar(
-                                      radius: 12,
-                                      backgroundColor: ColorPalate.WHITE,
-                                      backgroundImage:
-                                          AssetImage('images/complet.png'),
-                                    )
-                                  : Container()
+                                  SizedBox(width: 5),
+                                  // todoData[getIndex].repeatTask
+                                  repeatTask == 'select'
+                                      ? Text('')
+                                      : InkWell(
+                                          onTap: () {
+                                            showSnackBar(
+                                                message: 'Repation Active',
+                                                isError: false,
+                                                isToaster: true);
+                                          },
+                                          child: Icon(
+                                            Icons.notifications_active,
+                                            size: 15,
+                                          ),
+                                        ),
+                                ],
+                              )
                             ],
-                          )
-                        ],
-                      ),
-                    ))
-                  ],
-                ),
+                          ),
+                        ))
+                      ],
+                    ),
+                  ),
+                  isDone
+                      ? Positioned(
+                          bottom: 5,
+                          right: 60,
+                          child: Image.asset(
+                            ImagesProvider.COMPLETED,
+                            height: 40,
+                            width: 100,
+                            fit: BoxFit.cover,
+                          ),
+                        )
+                      : SizedBox()
+                ],
               );
             },
             error: (error, StackTrace) => Center(child: Text('Error')),

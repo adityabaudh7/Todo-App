@@ -4,21 +4,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:taskplus/Theme/Color_plate.dart';
-import 'package:taskplus/Theme/Dimensions.dart';
-import 'package:taskplus/Theme/text_theme.dart';
+import 'package:taskplus/Theme/Utils/Dimensions.dart';
+import 'package:taskplus/Theme/Utils/text_theme.dart';
 import 'package:taskplus/features/Notes/Provider/Note_Repo_Provider.dart';
 import 'package:taskplus/features/Task/Repositry/Todo_Repositry.dart';
 
 class NotesCardWidget extends ConsumerWidget {
+  final String Title;
+  final String Notes;
+  final String createdDate;
   final int index;
-  const NotesCardWidget({
-    Key? key,
-    required this.index,
-  }) : super(key: key);
+  const NotesCardWidget(
+      {Key? key,
+      required this.Notes,
+      required this.Title,
+      required this.index,
+      required this.createdDate})
+      : super(key: key);
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final darkMode = ref.watch(darkModeProvider);
-    final noteData = ref.watch(fetchNoteData);
+    // final noteData = ref.watch(fetchNoteData);
     return Container(
         decoration: BoxDecoration(
             boxShadow: [
@@ -36,10 +42,10 @@ class NotesCardWidget extends ConsumerWidget {
         child: Column(
           children: [
             Container(
-              height: 40,
+              height: 30,
               width: double.infinity,
               decoration: BoxDecoration(
-                  color: ColorPalate.Yellow.withOpacity(0.8),
+                  color: ColorPalate.PRIMERY1.withOpacity(0.8),
                   borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(15),
                       topRight: Radius.circular(15))),
@@ -49,7 +55,7 @@ class NotesCardWidget extends ConsumerWidget {
                     height: 40,
                     width: 60,
                     decoration: BoxDecoration(
-                        color: ColorPalate.ORANGE,
+                        color: ColorPalate.DARK_PRIMERY2,
                         borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(15),
                         )),
@@ -71,12 +77,14 @@ class NotesCardWidget extends ConsumerWidget {
             ),
             ListTile(
               title: Text(
-                noteData.value![index].titleTask,
+                // noteData.value![index].titleTask,
+                Title,
                 style: titleHeader.copyWith(
                     fontWeight: FontWeight.w500, fontSize: 16),
               ),
               subtitle: Text(
-                noteData.value![index].disCription,
+                Notes,
+                // noteData.value![index].disCription,
                 style: titilliumRegular,
                 textAlign: TextAlign.justify,
               ),

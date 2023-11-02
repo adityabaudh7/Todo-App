@@ -2,8 +2,8 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:taskplus/Theme/Dimensions.dart';
-import 'package:taskplus/Theme/text_theme.dart';
+import 'package:taskplus/Theme/Utils/Dimensions.dart';
+import 'package:taskplus/Theme/Utils/text_theme.dart';
 
 class CustomButton extends StatelessWidget {
   final String title;

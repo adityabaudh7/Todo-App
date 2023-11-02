@@ -10,8 +10,8 @@ import 'package:taskplus/Custom/Todo_Input_Text_Screen.dart';
 import 'package:taskplus/Custom/Widget/Custom_Button.dart';
 import 'package:taskplus/Theme/Animation/animation_plate.dart';
 import 'package:taskplus/Theme/Color_plate.dart';
-import 'package:taskplus/Theme/Dimensions.dart';
-import 'package:taskplus/Theme/text_theme.dart';
+import 'package:taskplus/Theme/Utils/Dimensions.dart';
+import 'package:taskplus/Theme/Utils/text_theme.dart';
 
 class SignInScreen extends ConsumerStatefulWidget {
   SignInScreen({Key? key}) : super(key: key);

@@ -1,4 +1,3 @@
-
 // ignore_for_file: prefer_const_constructors, deprecated_member_use
 
 import 'package:firebase_core/firebase_core.dart';
@@ -44,19 +43,22 @@ class MyApp extends ConsumerWidget {
                   scaffoldBackgroundColor: ColorPalate.LITE_PRIMERY,
                   backgroundColor: ColorPalate.WHITE),
           home: ref.watch(userDataAuthProvider).when(
-              data: (user) {
-                if (user == null) {
-                  return Boarding_Screen();
-                }
-                return DashboardScreen();
-              },
-              error: (err, trace) {
-                return ErrorScreen(
-                  error:
-                      'Error occurred. Please try again later. ${err.toString()}',
-                );
-              },
-              loading: () => Center(child: CircularProgressIndicator(),),)
+                data: (user) {
+                  if (user == null) {
+                    return Boarding_Screen();
+                  }
+                  return DashboardScreen();
+                },
+                error: (err, trace) {
+                  return ErrorScreen(
+                    error:
+                        'Error occurred. Please try again later. ${err.toString()}',
+                  );
+                },
+                loading: () => Center(
+                  child: CircularProgressIndicator(),
+                ),
+              )
 
           // Boarding_Screen(),
           ),

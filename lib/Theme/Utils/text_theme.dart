@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:taskplus/Theme/Dimensions.dart';
+import 'package:taskplus/Theme/Utils/Dimensions.dart';
 
 const titilliumRegular = TextStyle(
   fontFamily: 'graphik',

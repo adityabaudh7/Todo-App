@@ -14,8 +14,8 @@ import 'package:taskplus/Custom/Widget/ShowCustomSnackbar.dart';
 import 'package:taskplus/Screens/Error/Error_Screen.dart';
 import 'package:taskplus/Theme/Animation/animation_plate.dart';
 import 'package:taskplus/Theme/Color_plate.dart';
-import 'package:taskplus/Theme/Dimensions.dart';
-import 'package:taskplus/Theme/text_theme.dart';
+import 'package:taskplus/Theme/Utils/Dimensions.dart';
+import 'package:taskplus/Theme/Utils/text_theme.dart';
 import 'package:taskplus/features/Task/Repositry/Todo_Repositry.dart';
 
 class SignUpScreen extends ConsumerStatefulWidget {
@@ -23,12 +23,14 @@ class SignUpScreen extends ConsumerStatefulWidget {
   final String email;
   final String number;
   final String Password;
+  final String? authId;
   const SignUpScreen({
     Key? key,
     required this.name,
     required this.email,
     required this.number,
     required this.Password,
+    this.authId,
   }) : super(key: key);
 
   @override
@@ -119,7 +121,9 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
         Get.back();
       } else {
         showSnackBar(
-            message: 'Not Matched your confirm password!', isError: true);
+            message: 'Not Matched your confirm password!',
+            isError: true,
+            isToaster: true);
       }
     }
   }
@@ -167,7 +171,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                 const SizedBox(height: Dimensions.topSpace),
                 Center(
                   child: Text(
-                    'Registration',
+                    widget.authId != null ? 'Udate Page' : 'Registration',
                     style: titleHeader,
                   ),
                 ),
@@ -191,6 +195,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                           inputType: TextInputType.emailAddress,
                           label: 'Email Address',
                           isEmail: true,
+                          isEnable: widget.authId != null ? false : true,
                         ),
                         const SizedBox(height: Dimensions.paddingSizeSmall),
                         TextInputField(
@@ -227,12 +232,20 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                               ref.watch(userDataAuthProvider).when(
                                     data: (user) {
                                       if (user == null) {
-                                        StoreUserData();
-                                        print(0);
+                                        setState(() {
+                                          isLoading = true;
+                                          StoreUserData();
+                                          print(0);
+                                          isLoading = false;
+                                        });
                                       } else {
-                                        UpdateUserDetails();
+                                        setState(() {
+                                          isLoading = true;
+                                          UpdateUserDetails();
 
-                                        print('start');
+                                          print('start');
+                                          isLoading = false;
+                                        });
                                       }
                                     },
                                     error: (err, trace) {
@@ -247,7 +260,11 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                                   );
                             },
                             isLoading: isLoading,
-                            title: 'Submit',
+                            title: isLoading == true
+                                ? 'loding..'
+                                : widget.authId != null
+                                    ? 'Update User'
+                                    : 'Create User',
                             color: ColorPalate.ORANGE),
                       ],
                     ))

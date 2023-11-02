@@ -1,4 +1,6 @@
-// ignore_for_file: prefer_const_constructors, unnecessary_string_interpolations, deprecated_member_use
+// ignore_for_file: prefer_const_constructors, unnecessary_string_interpolations, deprecated_member_use, use_build_context_synchronously
+
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -6,10 +8,14 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:taskplus/Auth/Controller/Auth_controller.dart';
 import 'package:taskplus/Auth/Todo_Sign_up_screen.dart';
+import 'package:taskplus/Custom/Widget/ShowCustomSnackbar.dart';
+import 'package:taskplus/Settings/services/Utils_servises.dart';
 import 'package:taskplus/Theme/Color_plate.dart';
-import 'package:taskplus/Theme/Dimensions.dart';
-import 'package:taskplus/Theme/text_theme.dart';
+import 'package:taskplus/Theme/Utils/Dimensions.dart';
+import 'package:taskplus/Theme/Utils/text_theme.dart';
 import 'package:taskplus/features/Task/Repositry/Todo_Repositry.dart';
+
+import '../Settings/Faq_Screen.dart';
 
 class ProfileSettingScreen extends ConsumerStatefulWidget {
   const ProfileSettingScreen({Key? key}) : super(key: key);
@@ -22,6 +28,20 @@ class ProfileSettingScreen extends ConsumerStatefulWidget {
 class _ProfileSettingScreenState extends ConsumerState<ProfileSettingScreen> {
   void toLogoutUser() async {
     ref.read(authControllerProvider).LogoutUser();
+  }
+
+  File? _imageFile;
+  void SlectedImage() async {
+    _imageFile = await PickImageFromGallery(context);
+    ref.read(authControllerProvider).UpdateUserProfile(
+          context: context,
+          profilePic: _imageFile!,
+        );
+    showSnackBar(
+        message: 'Profile Pic update successfully !',
+        isError: false,
+        isToaster: true);
+    setState(() {});
   }
 
   @override
@@ -79,7 +99,9 @@ class _ProfileSettingScreenState extends ConsumerState<ProfileSettingScreen> {
                     leading: Icon(FontAwesomeIcons.circleHalfStroke, size: 20)),
               ),
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  Get.to(FaqScreens(), transition: Transition.fade);
+                },
                 child: ListTile(
                     title: Text('FAQ', style: titleRegular),
                     leading: Icon(FontAwesomeIcons.questionCircle, size: 20)),
@@ -158,27 +180,43 @@ class _ProfileSettingScreenState extends ConsumerState<ProfileSettingScreen> {
                               )
                             : Stack(
                                 children: [
-                                  Container(
-                                    // margin: const EdgeInsets.all(3.7),
-                                    height: 80,
-                                    width: 80,
-                                    decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                            image: NetworkImage(
-                                                userData.value!.profilePic),
-                                            fit: BoxFit.cover),
-                                        border: Border.all(
-                                            width: 3, color: ColorPalate.WHITE),
-                                        shape: BoxShape.circle,
-                                        color:
-                                            ColorPalate.GREY.withOpacity(0.1)),
-                                  ),
+                                  _imageFile != null
+                                      ? Container(
+                                          height: 80,
+                                          width: 80,
+                                          decoration: BoxDecoration(
+                                              image: DecorationImage(
+                                                  image: FileImage(_imageFile!),
+                                                  fit: BoxFit.cover),
+                                              border: Border.all(
+                                                  width: 3,
+                                                  color: ColorPalate.WHITE),
+                                              shape: BoxShape.circle,
+                                              color: ColorPalate.GREY
+                                                  .withOpacity(0.1)),
+                                        )
+                                      : Container(
+                                          height: 80,
+                                          width: 80,
+                                          decoration: BoxDecoration(
+                                              image: DecorationImage(
+                                                  image: NetworkImage(userData
+                                                      .value!.profilePic),
+                                                  fit: BoxFit.cover),
+                                              border: Border.all(
+                                                  width: 3,
+                                                  color: ColorPalate.WHITE),
+                                              shape: BoxShape.circle,
+                                              color: ColorPalate.GREY
+                                                  .withOpacity(0.1)),
+                                        ),
                                   Positioned(
                                       bottom: 6,
                                       right: 10,
                                       child: InkWell(
                                           onTap: () {
                                             print('1');
+                                            SlectedImage();
                                           },
                                           child: Icon(FontAwesomeIcons.edit,
                                               color: darkMode
@@ -230,6 +268,7 @@ class _ProfileSettingScreenState extends ConsumerState<ProfileSettingScreen> {
                                     Password: userData.value!.password,
                                     email: userData.value!.email,
                                     number: userData.value!.phoneNumber,
+                                    authId: userData.value!.uid,
                                   ));
                                 },
                                 icon: Icon(

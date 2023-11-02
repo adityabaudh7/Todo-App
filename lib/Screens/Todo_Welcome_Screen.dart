@@ -9,8 +9,8 @@ import 'package:taskplus/Auth/Todo_Sign_up_screen.dart';
 import 'package:taskplus/Custom/Widget/Custom_Button.dart';
 import 'package:taskplus/Theme/Animation/animation_plate.dart';
 import 'package:taskplus/Theme/Color_plate.dart';
-import 'package:taskplus/Theme/Dimensions.dart';
-import 'package:taskplus/Theme/text_theme.dart';
+import 'package:taskplus/Theme/Utils/Dimensions.dart';
+import 'package:taskplus/Theme/Utils/text_theme.dart';
 import 'package:taskplus/features/Task/Repositry/Todo_Repositry.dart';
 
 class WelcomeScreen extends ConsumerWidget {

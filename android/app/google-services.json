@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "410744124178",
-    "project_id": "task-pro-a4e22",
-    "storage_bucket": "task-pro-a4e22.appspot.com"
+    "project_number": "747698918940",
+    "project_id": "todo-plus-c097a",
+    "storage_bucket": "todo-plus-c097a.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:410744124178:android:aaacb69e076bdfd0a0b9cb",
+        "mobilesdk_app_id": "1:747698918940:android:0fe18e7ccc9a2fe6fdf1d9",
         "android_client_info": {
           "package_name": "com.example.taskplus"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBYJqo07G7YEM_hIoO7MM-p63_jo21rXAY"
+          "current_key": "AIzaSyAF1zxj_9quFbw66sYmm_ovs9cxIoILFdM"
         }
       ],
       "services": {
