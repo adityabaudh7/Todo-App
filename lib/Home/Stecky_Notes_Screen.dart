@@ -49,19 +49,17 @@ class _StickyNotesScreenState extends ConsumerState<StickyNotesScreen> {
                       child: GestureDetector(
                           onTap: () {
                             Get.to(AddNoteScreen(
-                              note: noteData.value![index].disCription,
-                              noteTitle: noteData.value![index].titleTask,
-                              createdDate:
-                                  noteData.value![index].createdNoteDate,
-                                  docID:noteData.value![index].docID
-                            ));
+                                note: noteData.value![index].disCription,
+                                noteTitle: noteData.value![index].titleTask,
+                                createdDate:
+                                    noteData.value![index].createdNoteDate,
+                                docID: noteData.value![index].docID));
                           },
                           child: NotesCardWidget(
                             index: index,
                             Notes: noteData.value![index].disCription,
                             Title: noteData.value![index].titleTask,
                             createdDate: noteData.value![index].createdNoteDate,
-                         
                           )),
                     );
                   },
@@ -83,7 +81,8 @@ class _StickyNotesScreenState extends ConsumerState<StickyNotesScreen> {
         },
         child: Icon(
           FontAwesomeIcons.plus,
-          color: ColorPalate.WHITE,
+          color: darkMode ? ColorPalate.DARK_PRIMERY : ColorPalate.WHITE,
+          size: 35,
         ),
         elevation: 5.0,
         shape: CircleBorder(),

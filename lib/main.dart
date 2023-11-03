@@ -34,8 +34,8 @@ class MyApp extends ConsumerWidget {
             useMaterial3: true,
             colorScheme: darkMode
                 ? ColorScheme.dark(
-                    primary: ColorPalate.BLACK,
-                  ).copyWith(background: ColorPalate.BLACK)
+                    primary: ColorPalate.WHITE,
+                  ).copyWith(background: ColorPalate.GREY)
                 : ColorScheme.light(
                     primary: ColorPalate.DARK_PRIMERY,
                   ),

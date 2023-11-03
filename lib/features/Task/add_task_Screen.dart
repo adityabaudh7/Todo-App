@@ -215,10 +215,13 @@ class _AddTaskScreenState extends ConsumerState<AddTaskScreen> {
                         print('1');
                         DateTime currentDate = DateTime.now();
                         final getValue = await showDatePicker(
+                          
                           context: context,
                           initialDate: currentDate,
                           firstDate: DateTime(2021),
                           lastDate: DateTime(2025),
+                          cancelText: 'Cancel'
+                          
                         );
 
                         if (getValue != null) {

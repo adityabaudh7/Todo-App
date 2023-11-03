@@ -89,7 +89,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     ),
                   ),
                 ),
-          title: Text('To-do-List',
+          title: Text('To-do',
               style: titleHeader.copyWith(color: ColorPalate.WHITE)),
           actions: [
             IconButton(
@@ -117,9 +117,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   children: [
                     Text('${greeting}, ',
                         style: titleHeader.copyWith(
-                            fontFamily: 'shipro',
-                            // color: ColorPalate.BLACK,
-                            fontSize: 16)),
+                            fontFamily: 'shipro', fontSize: 16)),
                     userData.value == null
                         ? Shimmer.fromColors(
                             baseColor: Colors.grey[300]!,

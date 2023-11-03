@@ -1,10 +1,12 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:taskplus/Theme/Color_plate.dart';
 import 'package:taskplus/Theme/Utils/text_theme.dart';
+import 'package:taskplus/features/Task/Repositry/Todo_Repositry.dart';
 
-class DateTimeWidget extends StatelessWidget {
+class DateTimeWidget extends ConsumerWidget {
   final String titleText;
   final String valueText;
   final IconData icon;
@@ -19,7 +21,8 @@ class DateTimeWidget extends StatelessWidget {
     this.isOptional = false,
   }) : super(key: key);
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final darkMode = ref.watch(darkModeProvider);
     return Expanded(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
