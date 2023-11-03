@@ -8,7 +8,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:taskplus/Auth/Controller/Auth_controller.dart';
 import 'package:taskplus/Auth/Todo_Sign_up_screen.dart';
-import 'package:taskplus/Custom/Widget/ShowCustomSnackbar.dart';
 import 'package:taskplus/Settings/App_info_Screen.dart';
 import 'package:taskplus/Settings/services/Utils_servises.dart';
 import 'package:taskplus/Theme/Color_plate.dart';
