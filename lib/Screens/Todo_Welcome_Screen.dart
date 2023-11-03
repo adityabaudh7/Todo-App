@@ -23,7 +23,7 @@ class WelcomeScreen extends ConsumerWidget {
         appBar: AppBar(
           // title: Text('WelcomeScreen'),
           toolbarHeight: 0,
-          backgroundColor: ColorPalate.WHITE,
+          backgroundColor: darkMode ? ColorPalate.black2 : ColorPalate.WHITE,
         ),
         body: Stack(
           children: [

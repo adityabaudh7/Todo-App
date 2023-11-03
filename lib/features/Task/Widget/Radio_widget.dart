@@ -22,7 +22,7 @@ class RadioWidget extends ConsumerWidget {
     final radioPro = ref.watch(radioProvider);
     final darkMode = ref.watch(darkModeProvider);
     return Material(
-      color: darkMode ? ColorPalate.black2 : ColorPalate.WHITE,
+      color: darkMode ? ColorPalate.TRANSPARENT : ColorPalate.TRANSPARENT,
       child: Theme(
         data: ThemeData(unselectedWidgetColor: categoryColor),
         child: RadioListTile(

@@ -112,18 +112,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // SizedBox(height: Dimensions.topSpace),
-                // AnimatedTextKit(
-                //   animatedTexts: [
-                //     TyperAnimatedText(
-                // '${greeting}',
-                // textStyle:
-                //     titilliumRegular.copyWith(color: ColorPalate.BLACK),
-                //     )
-                //   ],
-                //   repeatForever: true,
-                // ),
-
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -159,11 +147,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     )
                   ],
                 ),
-
                 SizedBox(height: Dimensions.paddingSizeExtraLarge),
                 TodoSliderScreenView(),
                 SizedBox(height: Dimensions.paddingSizeExtraLarge),
-
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -260,13 +246,25 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                             "Are you sure you want to delete this item?"),
                                         actions: <Widget>[
                                           TextButton(
-                                            child: Text("Cancel"),
+                                            child: Text(
+                                              "Cancel",
+                                              style: titleRegular.copyWith(
+                                                  color: darkMode
+                                                      ? ColorPalate.WHITE
+                                                      : ColorPalate.BLACK),
+                                            ),
                                             onPressed: () {
                                               Navigator.of(context).pop();
                                             },
                                           ),
                                           TextButton(
-                                            child: Text("Delete"),
+                                            child: Text(
+                                              "Delete",
+                                              style: titleRegular.copyWith(
+                                                  color: darkMode
+                                                      ? ColorPalate.WHITE
+                                                      : ColorPalate.BLACK),
+                                            ),
                                             onPressed: () {
                                               final docID = TodoTask.docID;
                                               TodoController()

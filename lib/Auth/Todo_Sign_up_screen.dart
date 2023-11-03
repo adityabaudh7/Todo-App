@@ -201,7 +201,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                         TextInputField(
                           prefixIcon: FontAwesomeIcons.phone,
                           controller: numberController,
-                          hintText: '+91 8874332621',
+                          hintText: '+91 9174332621',
                           inputType: TextInputType.phone,
                           label: 'Number',
                           isPhone: true,
@@ -232,20 +232,15 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                               ref.watch(userDataAuthProvider).when(
                                     data: (user) {
                                       if (user == null) {
-                                        setState(() {
-                                          isLoading = true;
-                                          StoreUserData();
-                                          print(0);
-                                          isLoading = false;
-                                        });
+                                        isLoading = true;
+                                        StoreUserData();
+                                        print(0);
+                                        isLoading = false;
                                       } else {
-                                        setState(() {
-                                          isLoading = true;
-                                          UpdateUserDetails();
-
-                                          print('start');
-                                          isLoading = false;
-                                        });
+                                        isLoading = true;
+                                        UpdateUserDetails();
+                                        print('start');
+                                        isLoading = false;
                                       }
                                     },
                                     error: (err, trace) {

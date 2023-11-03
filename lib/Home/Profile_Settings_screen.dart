@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:taskplus/Auth/Controller/Auth_controller.dart';
 import 'package:taskplus/Auth/Todo_Sign_up_screen.dart';
 import 'package:taskplus/Custom/Widget/ShowCustomSnackbar.dart';
+import 'package:taskplus/Settings/App_info_Screen.dart';
 import 'package:taskplus/Settings/services/Utils_servises.dart';
 import 'package:taskplus/Theme/Color_plate.dart';
 import 'package:taskplus/Theme/Utils/Dimensions.dart';
@@ -37,10 +38,7 @@ class _ProfileSettingScreenState extends ConsumerState<ProfileSettingScreen> {
           context: context,
           profilePic: _imageFile!,
         );
-    showSnackBar(
-        message: 'Profile Pic update successfully !',
-        isError: false,
-        isToaster: true);
+
     setState(() {});
   }
 
@@ -107,7 +105,9 @@ class _ProfileSettingScreenState extends ConsumerState<ProfileSettingScreen> {
                     leading: Icon(FontAwesomeIcons.questionCircle, size: 20)),
               ),
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  Get.to(AppInfoScreen(), transition: Transition.fade);
+                },
                 child: ListTile(
                     title: Text('App Info', style: titleRegular),
                     leading: Icon(FontAwesomeIcons.circleInfo, size: 20)),
@@ -181,48 +181,54 @@ class _ProfileSettingScreenState extends ConsumerState<ProfileSettingScreen> {
                             : Stack(
                                 children: [
                                   _imageFile != null
-                                      ? Container(
-                                          height: 80,
-                                          width: 80,
-                                          decoration: BoxDecoration(
-                                              image: DecorationImage(
-                                                  image: FileImage(_imageFile!),
-                                                  fit: BoxFit.cover),
-                                              border: Border.all(
-                                                  width: 3,
-                                                  color: ColorPalate.WHITE),
-                                              shape: BoxShape.circle,
-                                              color: ColorPalate.GREY
-                                                  .withOpacity(0.1)),
+                                      ? GestureDetector(
+                                          onTap: () {
+                                            SlectedImage();
+                                          },
+                                          child: Container(
+                                            height: 80,
+                                            width: 80,
+                                            decoration: BoxDecoration(
+                                                image: DecorationImage(
+                                                    image:
+                                                        FileImage(_imageFile!),
+                                                    fit: BoxFit.cover),
+                                                border: Border.all(
+                                                    width: 3,
+                                                    color: ColorPalate.WHITE),
+                                                shape: BoxShape.circle,
+                                                color: ColorPalate.GREY
+                                                    .withOpacity(0.1)),
+                                          ),
                                         )
-                                      : Container(
-                                          height: 80,
-                                          width: 80,
-                                          decoration: BoxDecoration(
-                                              image: DecorationImage(
-                                                  image: NetworkImage(userData
-                                                      .value!.profilePic),
-                                                  fit: BoxFit.cover),
-                                              border: Border.all(
-                                                  width: 3,
-                                                  color: ColorPalate.WHITE),
-                                              shape: BoxShape.circle,
-                                              color: ColorPalate.GREY
-                                                  .withOpacity(0.1)),
+                                      : GestureDetector(
+                                          onTap: () {
+                                            SlectedImage();
+                                          },
+                                          child: Container(
+                                            height: 80,
+                                            width: 80,
+                                            decoration: BoxDecoration(
+                                                image: DecorationImage(
+                                                    image: NetworkImage(userData
+                                                        .value!.profilePic),
+                                                    fit: BoxFit.cover),
+                                                border: Border.all(
+                                                    width: 3,
+                                                    color: ColorPalate.WHITE),
+                                                shape: BoxShape.circle,
+                                                color: ColorPalate.GREY
+                                                    .withOpacity(0.1)),
+                                          ),
                                         ),
                                   Positioned(
                                       bottom: 6,
                                       right: 10,
-                                      child: InkWell(
-                                          onTap: () {
-                                            print('1');
-                                            SlectedImage();
-                                          },
-                                          child: Icon(FontAwesomeIcons.edit,
-                                              color: darkMode
-                                                  ? ColorPalate.DARK_PRIMERY
-                                                  : ColorPalate.BLACK,
-                                              size: 10))),
+                                      child: Icon(FontAwesomeIcons.edit,
+                                          color: darkMode
+                                              ? ColorPalate.DARK_PRIMERY
+                                              : ColorPalate.BLACK,
+                                          size: 10)),
                                 ],
                               ),
                         userData.value != null

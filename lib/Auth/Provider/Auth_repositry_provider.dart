@@ -106,7 +106,7 @@ class AuthRepo {
   }) async {
     try {
       String photoUrl =
-          'https://firebasestorage.googleapis.com/v0/b/todo-plus-c097a.appspot.com/o/userplus-removebg-preview.png?alt=media&token=7ece9e5d-07bc-461c-bd18-1b512ca65bfe&_gl=1*1y05r4i*_ga*MjA0MjgwMDg2Ny4xNjg5NzMzNzcy*_ga_CW55HF8NVT*MTY5ODg5OTcyMS4xMDMuMS4xNjk4OTAxMjE5LjM1LjAuMA..';
+          'https://firebasestorage.googleapis.com/v0/b/todo-plus-c097a.appspot.com/o/userplus-removebg-preview.png?alt=media&token=7ece9e5d-07bc-461c-bd18-1b512ca65bfe&_gl=1*1r4ucs9*_ga*MjA0MjgwMDg2Ny4xNjg5NzMzNzcy*_ga_CW55HF8NVT*MTY5ODk5ODQ5OC4xMDkuMS4xNjk4OTk4NTE4LjQwLjAuMA..';
 
       UserCredential userCredential = await auth.createUserWithEmailAndPassword(
           email: email, password: password);
@@ -132,7 +132,6 @@ class AuthRepo {
       showSnackBar(message: e.toString(), isError: true);
     }
   }
-
   void updateUserData({
     required String name,
     required String email,
@@ -144,7 +143,7 @@ class AuthRepo {
   }) async {
     try {
       String photoUrl =
-          'https://firebasestorage.googleapis.com/v0/b/todo-plus-c097a.appspot.com/o/userplus-removebg-preview.png?alt=media&token=7ece9e5d-07bc-461c-bd18-1b512ca65bfe&_gl=1*1y05r4i*_ga*MjA0MjgwMDg2Ny4xNjg5NzMzNzcy*_ga_CW55HF8NVT*MTY5ODg5OTcyMS4xMDMuMS4xNjk4OTAxMjE5LjM1LjAuMA..';
+          'https://firebasestorage.googleapis.com/v0/b/todo-plus-c097a.appspot.com/o/userplus-removebg-preview.png?alt=media&token=7ece9e5d-07bc-461c-bd18-1b512ca65bfe&_gl=1*1r4ucs9*_ga*MjA0MjgwMDg2Ny4xNjg5NzMzNzcy*_ga_CW55HF8NVT*MTY5ODk5ODQ5OC4xMDkuMS4xNjk4OTk4NTE4LjQwLjAuMA..';
 
       String uid = auth.currentUser!.uid;
 
@@ -163,36 +162,34 @@ class AuthRepo {
       await firestore.collection('users').doc(uid).update(
             user.toMap(),
           );
-      // Utils().toastMessage('User Updated !');
-      // Get.off(ProfileScreen(), transition: Transition.leftToRightWithFade);
       print('User data updated successfully.');
     } catch (e) {
       print(e);
     }
   }
 
+  void updateProfilePic({
+    required File profilePic,
+    required ProviderRef ref,
+    required BuildContext context,
+  }) async {
+    try {
+      String uid = auth.currentUser!.uid;
 
-void updateProfilePic({
-  required File profilePic,
-  required ProviderRef ref,
-  required BuildContext context,
-}) async {
-  try {
-    String uid = auth.currentUser!.uid;
+      String photoUrl = await ref
+          .read(commonFirebaseStoreRepoProvider)
+          .storeFieldToFirebase('profilePic/$uid', profilePic);
 
-    String photoUrl = await ref
-        .read(commonFirebaseStoreRepoProvider)
-        .storeFieldToFirebase('profilePic/$uid', profilePic);
-
-    await firestore.collection('users').doc(uid).update({
-      'profilePic': photoUrl,
-    });
-
-    print('Profile picture updated successfully.');
-  } catch (e) {
-    print(e);
+      await firestore.collection('users').doc(uid).update({
+        'profilePic': photoUrl,
+      });
+      showSnackBar(
+          message: 'Profile picture updated successfully !',
+          isError: false,
+          isToaster: true);
+      print('Profile picture updated successfully.');
+    } catch (e) {
+      print(e);
+    }
   }
-}
-
-
 }

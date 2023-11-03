@@ -69,10 +69,10 @@ class AuthController {
         context: context);
   }
 
-  void UpdateUserProfile({
-    required BuildContext context,
-    required File profilePic,
-  }) {
+  void UpdateUserProfile(
+   {required BuildContext context,
+ required   File profilePic,}
+  ) {
     authRepository.updateProfilePic(
       profilePic: profilePic,
       ref: ref,

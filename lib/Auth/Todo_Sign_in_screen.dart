@@ -12,6 +12,7 @@ import 'package:taskplus/Theme/Animation/animation_plate.dart';
 import 'package:taskplus/Theme/Color_plate.dart';
 import 'package:taskplus/Theme/Utils/Dimensions.dart';
 import 'package:taskplus/Theme/Utils/text_theme.dart';
+import 'package:taskplus/features/Task/Repositry/Todo_Repositry.dart';
 
 class SignInScreen extends ConsumerStatefulWidget {
   SignInScreen({Key? key}) : super(key: key);
@@ -38,11 +39,12 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final darkMode = ref.watch(darkModeProvider);
     return Scaffold(
-        backgroundColor: ColorPalate.WHITE,
+        backgroundColor: darkMode ? ColorPalate.black2 : ColorPalate.WHITE,
         appBar: AppBar(
           toolbarHeight: 0,
-          backgroundColor: ColorPalate.WHITE,
+          backgroundColor: darkMode ? ColorPalate.black2 : ColorPalate.WHITE,
         ),
         body: Stack(
           children: [

@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:taskplus/features/Post/Card_content.dart';
 import 'package:taskplus/features/Post/Services/Poster_Services.dart';
 import 'package:taskplus/features/Post/Widget/Custom_Slider_Card.dart';
+import 'package:taskplus/features/Post/Widget/Task_Card_Widget.dart';
 
 class TodoSliderScreenView extends ConsumerWidget {
   const TodoSliderScreenView({Key? key}) : super(key: key);
@@ -26,21 +27,26 @@ class TodoSliderScreenView extends ConsumerWidget {
           height: MediaQuery.of(context).size.width * 0.32,
           child: CarouselSlider.builder(
             itemCount: fetchPoster.value == null || fetchPoster.value!.isEmpty
-                ? cardContents.length
-                : fetchPoster.value!.length,
+                ? cardContents.length + 1
+                : fetchPoster.value!.length + 1,
             itemBuilder: (context, index, realIndex) {
-              if (fetchPoster.value == null || fetchPoster.value!.isEmpty) {
-                return CustomePosterCard(
-                  image: cardContents[index % cardContents.length].image,
-                  quot: cardContents[index % cardContents.length].quot,
-                  auther: cardContents[index % cardContents.length].auther,
-                );
+              if (index == 0) {
+                return TaskCardWidget();
               } else {
-                return CustomePosterCard(
-                  image: fetchPoster.value![index].image,
-                  quot: fetchPoster.value![index].quote,
-                  auther: fetchPoster.value![index].author,
-                );
+                index -= 1;
+                if (fetchPoster.value == null || fetchPoster.value!.isEmpty) {
+                  return CustomePosterCard(
+                    image: cardContents[index % cardContents.length].image,
+                    quot: cardContents[index % cardContents.length].quot,
+                    auther: cardContents[index % cardContents.length].auther,
+                  );
+                } else {
+                  return CustomePosterCard(
+                    image: fetchPoster.value![index].image,
+                    quot: fetchPoster.value![index].quote,
+                    auther: fetchPoster.value![index].author,
+                  );
+                }
               }
             },
             options: CarouselOptions(
